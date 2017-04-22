@@ -54,3 +54,42 @@ if (pesoValido && alturaValida)
 {
   tdIMC.textContent = peso / (altura * altura);
 }
+// FIM
+
+// Arrays, Loop e Estilos
+var pacientes = document.querySelectorAll(".paciente");
+for (var i = 0; i < pacientes.length; i++ )
+{
+  var paciente = pacientes[i];
+  var tdPeso = paciente.querySelector(".info-peso");
+  var peso = tdPeso.textContent;
+
+  var tdAltura = paciente.querySelector(".info-altura");
+  var altura = tdAltura.textContent;
+
+  var pesoValido = true;
+  var alturaValida = true;
+
+  var tdIMC = paciente.querySelector(".info-imc");
+
+  // Operadores lógicos
+  if (peso <= 0  || peso > 1000)
+  {
+    pesoValido = false;
+    tdIMC.textContent = "Peso inválido!";
+    paciente.style.backgroundColor = "lightcoral"; // alterando a cor de fundo da tr na mão.
+  }
+
+  if (altura <= 0  || altura > 3.00)
+  {
+    alturaValida = false;
+    tdIMC.textContent = "Altura inválida!"
+    paciente.classList.add("paciente-invalido");  // utilizando classe css para alterar a cor, atribuindo class à tr.
+  }
+
+  if (pesoValido && alturaValida)
+  {
+    tdIMC.textContent = (peso / (altura * altura)).toFixed(2);
+  }
+}
+// FIMM
