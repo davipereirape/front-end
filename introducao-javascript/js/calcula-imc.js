@@ -89,7 +89,15 @@ for (var i = 0; i < pacientes.length; i++ )
 
   if (pesoValido && alturaValida)
   {
-    tdIMC.textContent = (peso / (altura * altura)).toFixed(2);
+    tdIMC.textContent = calculaIMC(peso, altura);
   }
+}
+
+function calculaIMC(peso, altura)
+{
+  var imc = 0;
+  imc = (peso / (altura * altura)).toFixed(2);
+
+  return imc;
 }
 // FIMM
