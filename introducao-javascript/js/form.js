@@ -26,12 +26,9 @@ botaoAdicionar.addEventListener("click", function(event){
     return;
   }
 
-  var pacienteTr = montaTr(paciente);
+  adicionaPacianteNaTabela(paciente);
 
-  var tabela = document.querySelector("#tabela-pacientes");
-  tabela.appendChild(pacienteTr);
   form.reset();
-
   var ul = document.querySelector("#mensagens-erro");
   ul.innerHTML = "";
 })
@@ -103,4 +100,11 @@ function exibeMensagensErro(erros)
     li.textContent = erro;
     ul.appendChild(li);
   });
+}
+
+function adicionaPacianteNaTabela(paciente)
+{
+    var pacienteTr = montaTr(paciente);
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
 }
