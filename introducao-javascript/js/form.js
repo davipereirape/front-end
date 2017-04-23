@@ -17,11 +17,23 @@ botaoAdicionar.addEventListener("click", function(event){
 
   var form = document.querySelector("#form-adiciona");
   var paciente = obtemPacienteDoFormulario(form);
+
+  var erros = validaPaciente(paciente);
+  if (erros.length > 0)
+  {
+    exibeMensagensErro(erros);
+    console.log("Paciente inválido!");
+    return;
+  }
+
   var pacienteTr = montaTr(paciente);
 
   var tabela = document.querySelector("#tabela-pacientes");
   tabela.appendChild(pacienteTr);
   form.reset();
+
+  var ul = document.querySelector("#mensagens-erro");
+  ul.innerHTML = "";
 })
 // FIM
 
@@ -60,4 +72,35 @@ function montaTd(dado, classe)
   td.classList.add(classe);
 
   return td;
+}
+
+function validaPaciente(paciente)
+{
+  var erros = [];
+
+  if (paciente.nome.length == 0)
+    erros.push("Campo nome é obrigatório!");
+
+  if (!validaPeso(paciente.peso) || paciente.peso.length == 0)
+    erros.push("Peso inválido!");
+
+  if (!validaAltura(paciente.altura) || paciente.altura.length == 0)
+    erros.push("Altura inválida!");
+
+  if (paciente.gordura.length == 0)
+    erros.push("A taxa de gordura é obrigatória!")
+
+  return erros;
+}
+
+function exibeMensagensErro(erros)
+{
+  var ul = document.querySelector("#mensagens-erro");
+  ul.innerHTML = "";
+
+  erros.forEach(function(erro){
+    var li = document.createElement("li");
+    li.textContent = erro;
+    ul.appendChild(li);
+  });
 }

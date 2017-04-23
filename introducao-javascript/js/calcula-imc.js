@@ -67,20 +67,20 @@ for (var i = 0; i < pacientes.length; i++ )
   var tdAltura = paciente.querySelector(".info-altura");
   var altura = tdAltura.textContent;
 
-  var pesoValido = true;
-  var alturaValida = true;
+  var pesoValido = validaPeso(peso);
+  var alturaValida = validaAltura(altura);
 
   var tdIMC = paciente.querySelector(".info-imc");
 
   // Operadores lógicos
-  if (peso <= 0  || peso > 1000)
+  if (pesoValido == false)
   {
     pesoValido = false;
     tdIMC.textContent = "Peso inválido!";
     paciente.style.backgroundColor = "lightcoral"; // alterando a cor de fundo da tr na mão.
   }
 
-  if (altura <= 0  || altura > 3.00)
+  if (alturaValida == false)
   {
     alturaValida = false;
     tdIMC.textContent = "Altura inválida!"
@@ -90,6 +90,30 @@ for (var i = 0; i < pacientes.length; i++ )
   if (pesoValido && alturaValida)
   {
     tdIMC.textContent = calculaIMC(peso, altura);
+  }
+}
+
+function validaPeso(peso)
+{
+  if(peso > 0 && peso < 1000)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+function validaAltura(altura)
+{
+  if (altura > 0  && altura < 3.00)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
   }
 }
 
