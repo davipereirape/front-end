@@ -60,9 +60,15 @@
     </table>
     <script src="js/app/models/Negociacao.js"> </script>
     <script> 
-        var n1 = new Negociacao(new Date(), 5, 700);
-        var volume = n1.obtemVolume();
-        console.log(volume);
+
+        // var X let -> A criação de variáveis com a palavra reservada "let" garante que 
+        // a mesma só poderá ser usada de acordo com seu bloco (espoco de bloco), ou seja, a variável não fica global e 
+        // não é acessível fora do seu bloco de criação. O var faz o contrário, uma vez criado, pode ser utilizado
+        // em todo o código.
+        let n1 = new Negociacao(new Date(), 5, 700);
+        
+        console.log(n1.volume);
+        console.log(n1.quantidade);
 
     </script>
 </body>
