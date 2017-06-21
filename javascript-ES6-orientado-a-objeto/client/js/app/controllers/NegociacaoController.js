@@ -21,9 +21,11 @@ class NegociacaoController
     {
         event.preventDefault();
 
-       // let negociacao = new Negociacao(this._inputData, this._inputQuantidade, this._inputValor);
+        let data = new Date(...this._inputData.value
+            .split('-').map((item, indice) => item - indice % 2) ); // utilização do aereo function
 
-        console.log(this._inputData.value);
+        let negociacao = new Negociacao(data, this._inputQuantidade, this._inputValor);
+        console.log(negociacao);
     }
 
 
