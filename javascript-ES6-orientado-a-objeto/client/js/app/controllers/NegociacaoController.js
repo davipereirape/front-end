@@ -14,7 +14,10 @@ class NegociacaoController
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
-        Object.freeze(this);
+        this._listaNegociacao = new ListaNegociacao();
+        this._negociacaoView = new NegociacaoView($('#negociacaoView'));
+
+        this._negociacaoView.update(this._listaNegociacao); 
     }
 
     
@@ -22,11 +25,23 @@ class NegociacaoController
     {
         event.preventDefault(); // cancela o evento do botão, (o submit após este tratamento)
         
-        let negociacao = new Negociacao(DateHelper.textoParaData(this._inputData.value), this._inputQuantidade, this._inputValor);
-        let diaMesAno = DateHelper.dataParaTexto(negociacao.data);
+        this._listaNegociacao.adiciona(this._criaNegociacao());
+        this._negociacaoView.update(this._listaNegociacao); 
+        this._limpaFormulario();
+    }
 
-        console.log(diaMesAno);
-        console.log(negociacao);
+    _criaNegociacao()
+    {
+        return new Negociacao(DateHelper.textoParaData(
+            this._inputData.value), this._inputQuantidade.value, this._inputValor.value);
+    }
 
+    _limpaFormulario()
+    {
+        this._inputData.value = '';
+        this._inputQuantidade.value = 1;
+        this._inputValor.value = 0.0;
+        
+        this._inputData.focus(); 
     }
 }
