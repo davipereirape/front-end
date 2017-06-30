@@ -17,16 +17,16 @@ class NegociacaoController
         Object.freeze(this);
     }
 
+    
     adiciona(event) 
     {
-        event.preventDefault();
+        event.preventDefault(); // cancela o evento do botão, (o submit após este tratamento)
+        
+        let negociacao = new Negociacao(DateHelper.textoParaData(this._inputData.value), this._inputQuantidade, this._inputValor);
+        let diaMesAno = DateHelper.dataParaTexto(negociacao.data);
 
-        let data = new Date(...this._inputData.value
-            .split('-').map((item, indice) => item - indice % 2) ); // utilização do aereo function
-
-        let negociacao = new Negociacao(data, this._inputQuantidade, this._inputValor);
+        console.log(diaMesAno);
         console.log(negociacao);
+
     }
-
-
 }
