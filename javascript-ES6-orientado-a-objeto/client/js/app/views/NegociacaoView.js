@@ -4,16 +4,16 @@
  * @author Davi Pereira - <pereiradavipe@gmail.com>.
  * @size 30/06/2017.
  */
-class NegociacaoView
+class NegociacaoView extends View
 {
+
     constructor(elemento)
     {
-        this._elemento = elemento;
+        super(elemento);
     }
 
-    _template(model)
-    {
-        return `
+    template(model) { 
+            return `
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
@@ -35,13 +35,13 @@ class NegociacaoView
                         `
                     ).join('')};
                 </tbody>
-                <tfoot></tfoot>
+                <tfoot>
+                    <td colspan="3"><b>Total:</td>
+                    <td>
+                        ${ model.listaNegociacao.reduce((total, n) => total + n.volume, 0.0)}
+                    </td>  
+                </tfoot>
             </table>
         `;
-    }
-
-    update(model)
-    { 
-        this._elemento.innerHTML = this._template(model);
     }
 }

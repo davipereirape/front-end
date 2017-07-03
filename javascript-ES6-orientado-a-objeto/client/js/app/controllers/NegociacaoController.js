@@ -16,18 +16,23 @@ class NegociacaoController
         this._inputValor = $('#valor');
         this._listaNegociacao = new ListaNegociacao();
         this._negociacaoView = new NegociacaoView($('#negociacaoView'));
-
         this._negociacaoView.update(this._listaNegociacao); 
+        
+        this._mensagem = new Mensagem();
+        this._mensagemView = new MensagemView($('#mensagemView'));
     }
 
     
     adiciona(event) 
-    {
+    { 
         event.preventDefault(); // cancela o evento do botão, (o submit após este tratamento)
         
         this._listaNegociacao.adiciona(this._criaNegociacao());
         this._negociacaoView.update(this._listaNegociacao); 
         this._limpaFormulario();
+        
+        this._mensagem.texto = 'Negociação adicionada com sucesso!';
+        this._mensagemView.update(this._mensagem);
     }
 
     _criaNegociacao()
